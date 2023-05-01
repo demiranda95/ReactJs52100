@@ -20,6 +20,10 @@ export default function App() {
 				<TextInput placeholder='Agregar producto' placeholderTextColor='lightgray' style={styles.input} onChangeText={onHandleChangeText} value={textItem} />
 				<Button title='Agregar' onPress={() => console.log('Producto Agregado')} color={'lightgray'} />
 			</View>
+			<View style={styles.listContainer}>
+				<TextInput placeholder='Agregar producto' placeholderTextColor='lightgray' style={styles.input} onChangeText={onHandleChangeText} value={textItem} />
+				<Button title='Agregar' onPress={() => console.log('Producto Agregado')} color={'lightgray'} />
+			</View>
 		</View>
 	)
 }
@@ -58,10 +62,10 @@ const styles = StyleSheet.create({
 		borderBottomWidth: 2,
 		width: 200,
 	},
-	text2: {
-		fontSize: 30,
-		fontWeight: 500,
-		margin: 30,
-		color: '#fff',
+	listContainer: {
+		paddingTop: 50,
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		alignItems: 'center',
 	},
 })
