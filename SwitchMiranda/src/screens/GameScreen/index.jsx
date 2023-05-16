@@ -16,8 +16,8 @@ const GameScreen = () => {
 			<Text style={styles.textColor}>Tu oponente aposto en:</Text>
 			<Text style={styles.textColor}>{currentGuess}</Text>
 			<Card otherStyles={styles.buttonContainer}>
-				<Button title='Bajo' color={colors.black} onPress={() => console.log('Lower')} />
-				<Button title='Alto' color={colors.black} onPress={() => console.log('Higher')} />
+				<Button title='Bajo' color={colors.black} onPress={() => console.log('Bajo')} />
+				<Button title='Alto' color={colors.black} onPress={() => console.log('Alto')} />
 			</Card>
 		</View>
 	)
