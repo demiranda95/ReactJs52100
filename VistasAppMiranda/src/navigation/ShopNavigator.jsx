@@ -21,5 +21,3 @@ const ShopNavigator = () => {
 }
 
 export default ShopNavigator
-
-const styles = StyleSheet.create({})
