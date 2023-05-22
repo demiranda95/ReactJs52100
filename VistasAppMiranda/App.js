@@ -1,8 +1,8 @@
 import { useFonts } from 'expo-font'
-import ShopNavigator from './src/navigation/ShopNavigator'
+import { NavigationContainer } from '@react-navigation/native'
+import BottomTabNavigator from './src/navigation/BottomTabNavigator'
 
 export default function App() {
-
 	const [loaded] = useFonts({
 		OpenSansRegular: require('./src/assets/fonts/OpenSans-Regular.ttf'),
 		OpenSansBold: require('./src/assets/fonts/OpenSans-Bold.ttf'),
@@ -12,8 +12,9 @@ export default function App() {
 	if (!loaded) return null
 
 	return (
-		<ShopNavigator />
+		<NavigationContainer>
+			<BottomTabNavigator />
+		</NavigationContainer>
 	)
 }
-
 
