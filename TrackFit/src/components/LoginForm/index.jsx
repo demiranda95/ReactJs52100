@@ -7,9 +7,6 @@ const LoginForm = ({ onLogin }) => {
 	const [password, setPassword] = useState('')
 
 	const handleLogin = () => {
-		// Puedes realizar cualquier validación adicional aquí antes de llamar a la función onLogin
-
-		// Llama a la función onLogin y pasa los datos del formulario como argumento
 		onLogin({ username, password })
 	}
 

@@ -7,7 +7,6 @@ const HomeScreen = () => {
 	return (
 		<SafeAreaView style={styles.container}>
 			<View style={styles.container}>
-				{/* Encabezado */}
 				<Text style={styles.header}>TrackFit</Text>
 
 				{/* Resumen de actividad diaria */}

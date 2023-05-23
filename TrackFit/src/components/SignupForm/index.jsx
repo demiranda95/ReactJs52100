@@ -9,9 +9,6 @@ const SignupForm = ({ onSignup }) => {
 
 	const handleSignup = () => {
 		console.log('inicio de sesion')
-		// Puedes realizar cualquier validación adicional aquí antes de llamar a la función onSignup
-
-		// Llama a la función onSignup y pasa los datos del formulario como argumento
 		onSignup({ name, email, password })
 	}
 
