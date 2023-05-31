@@ -1,14 +1,22 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, FlatList, TouchableOpacity, Image } from 'react-native'
 import { styles } from './styles'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectedCategory } from '../../store/actions/category.action'
+import CategoriesItem from '../../components/CategoriesItem'
 
-const ExercisesScreen = () => {
+const ExercisesScreen = ({ navigation }) => {
+	const handleStorePress = () => {
+		navigation.navigate('Store')
+	}
+
 	return (
 		<View style={styles.container}>
-			<Text style={styles.title}>Ejercicios</Text>
-			{/* Aquí puedes mostrar una lista de ejercicios disponibles */}
-			{/* Cada elemento de la lista puede contener una imagen, nombre y descripción del ejercicio */}
-			{/* Puedes agregar componentes adicionales para filtrar o buscar ejercicios */}
+			<TouchableOpacity onPress={handleStorePress}>
+				<View style={styles.storeContainer}>
+					<Image source={require('../../assets/img/ExerciseStore.jpg')} style={styles.bannerImage} />
+				</View>
+			</TouchableOpacity>
 		</View>
 	)
 }

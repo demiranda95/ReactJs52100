@@ -17,13 +17,8 @@ export const styles = StyleSheet.create({
 		width: 150,
 	},
 	storeContainer: {
-		width: '95%',
-		aspectRatio: 2.7,
-		borderRadius: 10,
-		overflow: 'hidden',
-	},
-	bannerImage: {
-		flex: 1,
-		resizeMode: 'cover',
+		justifyContent: 'flex-start',
+		alignItems: "flex-start",
+		height: 150,
 	},
 })
