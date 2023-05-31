@@ -1,9 +1,6 @@
 import React from 'react'
 import { View, Text, FlatList, TouchableOpacity, Image } from 'react-native'
 import { styles } from './styles'
-import { useDispatch, useSelector } from 'react-redux'
-import { selectedCategory } from '../../store/actions/category.action'
-import CategoriesItem from '../../components/CategoriesItem'
 
 const ExercisesScreen = ({ navigation }) => {
 	const handleStorePress = () => {
@@ -15,6 +12,9 @@ const ExercisesScreen = ({ navigation }) => {
 			<TouchableOpacity onPress={handleStorePress}>
 				<View style={styles.storeContainer}>
 					<Image source={require('../../assets/img/ExerciseStore.jpg')} style={styles.bannerImage} />
+					<View style={styles.overlay}>
+						<Text style={styles.overlayText}>Tienda</Text>
+					</View>
 				</View>
 			</TouchableOpacity>
 		</View>

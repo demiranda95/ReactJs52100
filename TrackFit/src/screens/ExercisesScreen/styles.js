@@ -26,4 +26,15 @@ export const styles = StyleSheet.create({
 		flex: 1,
 		resizeMode: 'cover',
 	},
+	overlay: {
+		...StyleSheet.absoluteFillObject,
+		backgroundColor: 'rgba(0, 0, 0, 0.5)',
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+	overlayText: {
+		fontSize: 24,
+		fontWeight: 'bold',
+		color: 'white',
+	},
 })
