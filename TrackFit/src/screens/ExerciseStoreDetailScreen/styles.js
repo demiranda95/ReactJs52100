@@ -13,6 +13,7 @@ export const styles = StyleSheet.create({
 		height: 200,
 		resizeMode: 'cover',
 		marginBottom: 16,
+		borderRadius: 50,
 	},
 	detailsContainer: {
 		padding: 16,
@@ -22,18 +23,20 @@ export const styles = StyleSheet.create({
 		shadowOffset: { width: 0, height: 2 },
 		shadowRadius: 4,
 		elevation: 5,
-		backgroundColor: COLORS.white,
+		backgroundColor: COLORS.dark,
 	},
 	name: {
 		fontSize: 24,
 		fontWeight: 'bold',
 		marginBottom: 8,
 		textAlign: 'center',
+		color: COLORS.white,
 	},
 	description: {
 		fontSize: 16,
 		marginBottom: 8,
 		textAlign: 'justify',
+		color: COLORS.white,
 	},
 	price: {
 		fontSize: 30,

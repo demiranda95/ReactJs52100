@@ -10,9 +10,12 @@ import ExerciseStoreScreen from '../screens/ExerciseStoreScreen'
 import ExerciseStoreProductsScreen from '../screens/ExerciseStoreProductsScreen'
 import ExerciseStoreDetailScreen from '../screens/ExerciseStoreDetailScreen'
 import ExerciseStoreCartScreen from '../screens/ExerciseStoreCartScreen'
-import ExerciseStoreCheckoutScreen from '../screens/ExerciseStoreCheckoutScreen'
+import ExerciseStoreOrdersScreen from '../screens/ExerciseStoreOrdersScreen'
 
 import { createStackNavigator } from '@react-navigation/stack'
+import { COLORS } from '../constants/colors'
+import { Ionicons } from '@expo/vector-icons'
+import { color } from 'react-native-reanimated'
 
 const Drawer = createDrawerNavigator()
 const StackExercises = createStackNavigator()
@@ -61,7 +64,7 @@ const StackNavigatorExerciseStore = () => {
 					headerBackTitle: 'Volver',
 				}}
 			/>
-			<StackExerciseStore.Screen
+			{/*<StackExerciseStore.Screen
 				name='Cart'
 				component={ExerciseStoreCartScreen}
 				options={{
@@ -69,12 +72,13 @@ const StackNavigatorExerciseStore = () => {
 				}}
 			/>
 			<StackExerciseStore.Screen
-				name='Checkout'
-				component={ExerciseStoreCheckoutScreen}
+				name='Orders'
+				component={ExerciseStoreOrdersScreen}
 				options={{
 					headerBackTitle: 'Volver',
 				}}
 			/>
+			*/}
 		</StackExerciseStore.Navigator>
 	)
 }
@@ -87,17 +91,71 @@ const StackNavigatorExerciseStoreCart = () => {
 			}}
 		>
 			<StackExerciseStoreCart.Screen name='Cart' component={ExerciseStoreCartScreen} />
-			<StackExerciseStoreCart.Screen name='Checkout' component={ExerciseStoreCheckoutScreen} />
+		</StackExerciseStoreCart.Navigator>
+	)
+}
+
+const StackNavigatorExerciseStoreOrders = () => {
+	return (
+		<StackExerciseStoreCart.Navigator
+			screenOptions={{
+				headerShown: false,
+			}}
+		>
+			<StackExerciseStoreCart.Screen name='Cart' component={ExerciseStoreOrdersScreen} />
 		</StackExerciseStoreCart.Navigator>
 	)
 }
 
 const ExerciseNavigation = () => {
 	return (
-		<Drawer.Navigator>
-			<Drawer.Screen name='Dashboard' component={StackNavigatorExercises} options={{ title: 'Ejercicios' }} />
-			<Drawer.Screen name='Store' component={StackNavigatorExerciseStore} options={{ title: 'Tienda' }} />
-			<Drawer.Screen name='Cart' component={StackNavigatorExerciseStoreCart} options={{ title: 'Carrito' }} />
+		<Drawer.Navigator
+			screenOptions={{
+				headerStyle: {
+					backgroundColor: COLORS.dark,
+				},
+				drawerActiveTintColor: COLORS.primary,
+				drawerInactiveTintColor: COLORS.dark,
+				drawerLabelStyle: {
+					fontWeight: 'bold',
+					color: COLORS.white,
+				},
+
+				drawerIcon: { color: COLORS.primary },
+			}}
+		>
+			<Drawer.Screen
+				name='Dashboard'
+				component={StackNavigatorExercises}
+				options={{
+					title: 'Ejercicios',
+					drawerIcon: ({ focused }) => <Ionicons name={focused ? 'home' : 'home-outline'} color={COLORS.primary} />,
+				}}
+			/>
+			<Drawer.Screen
+				name='Store'
+				component={StackNavigatorExerciseStore}
+				options={{
+					title: 'Tienda',
+					drawerIcon: ({ focused }) => <Ionicons name={focused ? 'cart' : 'cart-outline'} color={COLORS.primary} />,
+				}}
+			/>
+			<Drawer.Screen
+				name='Cart'
+				component={StackNavigatorExerciseStoreCart}
+				options={{
+					title: 'Carrito',
+					drawerIcon: ({ focused }) => <Ionicons name={focused ? 'basket' : 'basket-outline'} color={COLORS.primary} />,
+				}}
+			/>
+			<Drawer.Screen
+				name='Orders'
+				component={StackNavigatorExerciseStoreOrders}
+				options={{
+					title: 'Ordenes',
+					drawerIcon: ({ focused }) => <Ionicons name={focused ? 'receipt' : 'receipt-outline'} color={COLORS.primary} />,
+				}}
+			/>
 		</Drawer.Navigator>
 	)
 }

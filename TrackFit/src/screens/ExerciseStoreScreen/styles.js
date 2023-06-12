@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
 		marginBottom: 20,
 	},
 	sectionTitle: {
-		fontSize: 22,
+		fontSize: 18,
 		fontWeight: 'bold',
 		marginLeft: 10,
 		marginBottom: 10,

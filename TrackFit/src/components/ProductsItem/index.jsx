@@ -12,7 +12,7 @@ const ProductsItem = ({ item, onSelected }) => {
 	return (
 		<TouchableOpacity style={styles.container} onPress={handlePress}>
 			<View style={styles.imageContainer}>
-				<Image style={styles.image} source={item.img} />
+				<Image style={styles.image} source={{ uri: item.img }} />
 			</View>
 			<View style={styles.textContainer}>
 				<Text style={styles.name}>{item.name}</Text>

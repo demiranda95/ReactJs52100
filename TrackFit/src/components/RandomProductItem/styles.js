@@ -3,7 +3,7 @@ import { COLORS } from '../../constants/colors'
 
 export const styles = StyleSheet.create({
 	container: {
-		width: 120,
+		width: 180,
 		height: 120,
 		borderRadius: 20,
 		marginRight: 5,

@@ -1,12 +1,11 @@
 import React from 'react'
-import { NavigationContainer } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import HomeScreen from '../screens/HomeScreen'
 import ProfileScreen from '../screens/ProfileScreen'
 import ExercisesScreen from '../screens/ExercisesScreen'
 import { COLORS } from '../constants/colors'
-import { Text, View } from 'react-native'
+import { View } from 'react-native'
 import ExerciseNavigation from './ExerciseNavigation'
 
 const Tab = createBottomTabNavigator()
@@ -16,6 +15,9 @@ const MainNavigator = () => {
 		<Tab.Navigator
 			screenOptions={{
 				headerShown: false,
+				tabBarStyle: { backgroundColor: COLORS.dark }, 
+				tabBarActiveTintColor: COLORS.primary, 
+				tabBarInactiveTintColor: COLORS.white, 
 			}}
 		>
 			<Tab.Screen
@@ -25,7 +27,7 @@ const MainNavigator = () => {
 					title: 'Home',
 					tabBarIcon: () => (
 						<View>
-							<Ionicons name='home' size={25} color={COLORS.dark} />
+							<Ionicons name='home' size={25} color={COLORS.primary} />
 						</View>
 					),
 				}}
@@ -37,7 +39,7 @@ const MainNavigator = () => {
 					title: 'Ejercicios',
 					tabBarIcon: () => (
 						<View>
-							<Ionicons name='barbell' size={25} color={COLORS.dark} />
+							<Ionicons name='barbell' size={25} color={COLORS.primary} />
 						</View>
 					),
 				}}
@@ -49,7 +51,7 @@ const MainNavigator = () => {
 					title: 'Perfil',
 					tabBarIcon: () => (
 						<View>
-							<Ionicons name='person-circle' size={25} color={COLORS.dark} />
+							<Ionicons name='person-circle' size={25} color={COLORS.primary} />
 						</View>
 					),
 				}}

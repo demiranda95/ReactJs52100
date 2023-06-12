@@ -5,13 +5,12 @@ export const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		padding: 16,
-		backgroundColor: COLORS.secondary,
 	},
 	header: {
 		fontSize: 24,
 		fontWeight: 'bold',
 		marginBottom: 16,
-		color: COLORS.dark,
+		color: COLORS.white,
 	},
 	section: {
 		marginBottom: 16,
