@@ -1,12 +1,13 @@
 import React from 'react'
 import { StyleSheet, ScrollView, View, Image, Text, Dimensions, TouchableOpacity } from 'react-native'
-import { products } from '../StoreScreen'
 import { useNavigation } from '@react-navigation/native'
+import { useSelector } from 'react-redux'
 
 const windowWidth = Dimensions.get('window').width
 const itemWidth = (windowWidth - 45) / 2
 
 const ProductScreen = () => {
+	const products = useSelector((state) => state.products.products)
 	const navigation = useNavigation()
 	return (
 		<ScrollView contentContainerStyle={styles.container}>
