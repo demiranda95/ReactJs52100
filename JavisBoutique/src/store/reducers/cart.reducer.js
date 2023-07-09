@@ -1,5 +1,6 @@
 const initialState = {
 	cartItems: [],
+	orders: [],
 }
 
 const cartReducer = (state = initialState, action) => {
@@ -19,7 +20,7 @@ const cartReducer = (state = initialState, action) => {
 					return item
 				})
 
-				console.log('Productos en el carrito:', updatedItems) // Agrega el console.log aquí
+				console.log('Productos en el carrito:', updatedItems)
 
 				return {
 					...state,
@@ -31,7 +32,7 @@ const cartReducer = (state = initialState, action) => {
 					quantity,
 				}
 
-				console.log('Productos en el carrito:', [...state.cartItems, newItem]) // Agrega el console.log aquí
+				console.log('Productos en el carrito:', [...state.cartItems, newItem])
 
 				return {
 					...state,
@@ -44,6 +45,16 @@ const cartReducer = (state = initialState, action) => {
 			return {
 				...state,
 				cartItems: updatedItems,
+			}
+		case 'CONFIRM_CART':
+			return {
+				...state,
+				cartItems: [],
+			}
+		case 'FETCH_ORDERS':
+			return {
+				...state,
+				orders: action.payload,
 			}
 		default:
 			return state

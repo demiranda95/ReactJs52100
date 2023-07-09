@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchProducts } from '../../store/actions/products.action'
 import { fetchServices } from '../../store/actions/services.action'
 import { fetchCategories } from '../../store/actions/categories.action'
+import { fetchReservations } from '../../store/actions/reservations.action'
 
 const HomeScreen = () => {
 	const loadingProducts = useSelector((state) => state.products.loading)
@@ -27,6 +28,7 @@ const HomeScreen = () => {
 		dispatch(fetchCategories())
 		dispatch(fetchProducts())
 		dispatch(fetchServices())
+		dispatch(fetchReservations())
 	}, [dispatch])
 
 	if (loadingProducts) {

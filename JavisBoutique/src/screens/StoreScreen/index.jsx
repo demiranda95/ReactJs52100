@@ -4,8 +4,6 @@ import styles from './styles'
 import { useNavigation } from '@react-navigation/native'
 import { useDispatch, useSelector } from 'react-redux'
 
-
-
 const StoreScreen = () => {
 	const products = useSelector((state) => state.products.products)
 	const services = useSelector((state) => state.services.services)
@@ -41,7 +39,6 @@ const StoreScreen = () => {
 
 	const FeaturedServicesSection = () => {
 		const featuredServices = services.filter((service) => service.featured)
-		console.log('Featured Services:', featuredServices)
 
 		return (
 			<View style={styles.section}>
@@ -64,7 +61,6 @@ const StoreScreen = () => {
 
 	const FeaturedProductsSection = () => {
 		const featuredProducts = products.filter((product) => product.featured)
-		console.log('Featured Products:', featuredProducts)
 
 		if (featuredProducts.length > 0) {
 			return (

@@ -1,12 +1,14 @@
+import moment from 'moment'
 import { View, Text, Button, StyleSheet } from 'react-native'
 import { useSelector } from 'react-redux'
 
 const ReservationConfirm = ({ route, navigation }) => {
 	const services = useSelector((state) => state.services.services)
 	const { reservation } = route.params
+	console.log(reservation)
 
 	const handleHomeButtonPress = () => {
-		navigation.navigate('Home')
+		navigation.navigate('Store')
 	}
 
 	return (
@@ -23,19 +25,20 @@ const ReservationConfirm = ({ route, navigation }) => {
 				<Text style={styles.detailValue}>{reservation.rut}</Text>
 
 				<Text style={styles.detailLabel}>Fecha:</Text>
-				<Text style={styles.detailValue}>{reservation.date.format('DD/MM/YYYY')}</Text>
-
+				<Text style={styles.detailValue}>{moment(reservation.date).format('DD/MM/YYYY')}</Text>
 				<Text style={styles.detailLabel}>Hora:</Text>
 				<Text style={styles.detailValue}>{reservation.time}</Text>
 
 				<Text style={styles.detailLabel}>Servicios:</Text>
 				<Text style={styles.detailValue}>
-					{reservation.selectedServices
-						.map((serviceId) => {
-							const service = services.find((service) => service.id === serviceId)
-							return service ? service.title : 'Error'
-						})
-						.join(', ')}
+					{Array.isArray(reservation.selectedServices) && Array.isArray(services)
+						? reservation.selectedServices
+								.map((serviceId) => {
+									const service = services.find((service) => service.id === serviceId)
+									return service ? service.title : 'Error'
+								})
+								.join(', ')
+						: 'Error en los datos'}
 				</Text>
 			</View>
 

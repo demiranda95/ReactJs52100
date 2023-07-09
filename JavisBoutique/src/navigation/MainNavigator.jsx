@@ -6,7 +6,7 @@ import HomeScreen from '../screens/HomeScreen'
 import ContactScreen from '../screens/ContactScreen'
 import StoreNavigator from './StoreNavigator'
 import ReservationScreen from '../screens/ReservationScreen'
-import CartScreen from '../screens/CartScreen'
+import CartNavigator from './CartNavigator'
 
 const Tab = createBottomTabNavigator()
 
@@ -31,7 +31,7 @@ const screens = [
 	},
 	{
 		name: 'Cart',
-		component: CartScreen,
+		component: CartNavigator,
 		title: 'Carrito',
 		iconName: 'cart',
 	},

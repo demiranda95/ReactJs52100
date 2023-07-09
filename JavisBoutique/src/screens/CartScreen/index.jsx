@@ -1,13 +1,15 @@
 import React from 'react'
-import { StyleSheet, Text, View, FlatList, Image } from 'react-native'
+import { StyleSheet, Text, View, FlatList, Image, Alert } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useSelector, useDispatch } from 'react-redux'
 import { Ionicons } from '@expo/vector-icons'
-import { removeFromCart } from '../../store/actions/cart.action'
+import { confirmCart, removeFromCart } from '../../store/actions/cart.action'
+import { useNavigation } from '@react-navigation/native'
 
 const CartScreen = () => {
 	const dispatch = useDispatch()
+	const navigation = useNavigation()
 
 	const cartItems = useSelector((state) => state.cart.cartItems) // Obtén los productos del estado global o local
 
@@ -15,7 +17,6 @@ const CartScreen = () => {
 		dispatch(removeFromCart(item.product.id))
 	}
 
-	// Renderiza un elemento de la lista de productos del carrito
 	const renderItem = ({ item }) => {
 		const totalPrice = item.product.price * item.quantity
 
@@ -39,30 +40,34 @@ const CartScreen = () => {
 		)
 	}
 
-	const calculateSubtotal = () => {
-		let subtotal = 0
+	const calculateTotal = () => {
+		let total = 0
 		cartItems.forEach((item) => {
 			const totalPrice = item.product.price * item.quantity
-			subtotal += totalPrice
+			total += totalPrice
 		})
-		return subtotal.toFixed(0)
-	}
-
-	const calculateIVA = () => {
-		const subtotal = parseFloat(calculateSubtotal())
-		const iva = subtotal * 0.19
-		return iva.toFixed(0)
-	}
-
-	const calculateTotal = () => {
-		const subtotal = parseFloat(calculateSubtotal())
-		const iva = parseFloat(calculateIVA())
-		const total = subtotal + iva
 		return total.toFixed(0)
 	}
 
-	const handleBuyPress = () => {
-		// Lógica para procesar la compra
+	const calculateIVA = () => {
+		const total = parseFloat(calculateTotal())
+		const iva = total * 0.19
+		return iva.toFixed(0)
+	}
+
+	const handleConfirmPress = () => {
+		const total = calculateTotal()
+		if (cartItems.length === 0) {
+			Alert.alert('Carrito Vacio', 'No se puede confirmar la compra')
+			return
+		}
+
+		dispatch(confirmCart(cartItems, total))
+		navigation.navigate('CartConfirm', { items: cartItems, total: total })
+	}
+	
+	const handleOrders = () => {
+		navigation.navigate('Orders')
 	}
 
 	return (
@@ -72,10 +77,6 @@ const CartScreen = () => {
 			<View style={styles.separator} />
 			<View style={styles.summaryContainer}>
 				<View style={styles.summaryRow}>
-					<Text style={styles.summaryLabel}>Subtotal</Text>
-					<Text style={styles.summaryValue}>${calculateSubtotal()}</Text>
-				</View>
-				<View style={styles.summaryRow}>
 					<Text style={styles.summaryLabel}>IVA (19%)</Text>
 					<Text style={styles.summaryValue}>${calculateIVA()}</Text>
 				</View>
@@ -84,8 +85,11 @@ const CartScreen = () => {
 					<Text style={[styles.summaryValue, styles.summaryTotal]}>${calculateTotal()}</Text>
 				</View>
 			</View>
-			<TouchableOpacity style={styles.buyButton} onPress={handleBuyPress}>
+			<TouchableOpacity style={styles.buyButton} onPress={handleConfirmPress}>
 				<Text style={styles.buyButtonText}>Comprar</Text>
+			</TouchableOpacity>
+			<TouchableOpacity style={styles.buyButton} onPress={handleOrders}>
+				<Text style={styles.buyButtonText}>Ordenes Anteriores</Text>
 			</TouchableOpacity>
 		</SafeAreaView>
 	)

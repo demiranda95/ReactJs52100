@@ -1,19 +1,23 @@
-import React from 'react'
-import { Text, View, SafeAreaView, TextInput, Button, FlatList, TouchableOpacity, ScrollView } from 'react-native'
+import React, { useEffect } from 'react'
+import { Text, View, SafeAreaView, Button, FlatList, TouchableOpacity, Alert } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import styles from './styles'
 import { useNavigation } from '@react-navigation/native'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { deleteReservation, fetchReservations } from '../../store/actions/reservations.action'
 
 const ReservationScreen = () => {
 	const services = useSelector((state) => state.services.services)
 	const reservations = useSelector((state) => state.reservations.reservations)
-	console.log(reservations)
-
 	const navigation = useNavigation()
+	const dispatch = useDispatch()
+
+	useEffect(() => {
+		dispatch(fetchReservations())
+	}, [])
 
 	const timestampToDateTime = (timestamp) => {
-		const date = new Date(timestamp * 1000)
+		const date = new Date(timestamp)
 		const day = String(date.getDate()).padStart(2, '0')
 		const month = String(date.getMonth() + 1).padStart(2, '0')
 		const year = String(date.getFullYear()).slice(-2)
@@ -21,10 +25,6 @@ const ReservationScreen = () => {
 		const minutes = String(date.getMinutes()).padStart(2, '0')
 
 		return `${day}/${month}/${year} ${hours}:${minutes}`
-	}
-
-	const handleScheduleAppointment = () => {
-		navigation.navigate('Services')
 	}
 
 	const hasReservations = reservations.length > 0
@@ -37,17 +37,41 @@ const ReservationScreen = () => {
 		}
 
 		const handleConfirmPress = () => {
-			console.log(`Confirmar reserva ${item.id}`)
+			Alert.alert('Confirmar Reserva', '¿Estás seguro de confirmar esta reserva?', [
+				{
+					text: 'Cancelar',
+					style: 'cancel',
+				},
+				{
+					text: 'Confirmar',
+					onPress: () => {
+						console.log(`Confirmar reserva ${item.id}`)
+					},
+				},
+			])
 		}
 
 		const handleDeletePress = () => {
-			console.log(`Eliminar reserva ${item.id}`)
+			Alert.alert('Eliminar Reserva', '¿Estás seguro de eliminar esta reserva?', [
+				{
+					text: 'Cancelar',
+					style: 'cancel',
+				},
+				{
+					text: 'Eliminar',
+					style: 'destructive',
+					onPress: () => {
+						console.log(`Eliminar reserva ${item.id}`)
+						dispatch(deleteReservation(item.id))
+					},
+				},
+			])
 		}
 
 		return (
 			<View key={item.id} style={styles.reservationItemContainer}>
 				<TouchableOpacity style={styles.itemInfoContainer} onPress={handlePress}>
-					{item.selectedServices.map((serviceId) => {
+					{item.selectedServices?.map((serviceId) => {
 						const service = services.find((service) => service.id === serviceId)
 						return (
 							<Text key={`${item.id}-${serviceId}`}>
@@ -77,17 +101,15 @@ const ReservationScreen = () => {
 		<SafeAreaView style={styles.container}>
 			<View style={styles.sectionTop}>
 				<Text style={styles.sectionTitle}>Horas Agendadas</Text>
-				<View style={styles.reservationContainer}>
-					{hasReservations ? <FlatList data={reservations} renderItem={renderReservationItem} keyExtractor={(item) => `${item.id}-${item.selectedServices.join('-')}`} pagingEnabled={true} showsVerticalScrollIndicator={false} contentContainerStyle={{ flexGrow: 1 }} /> : <Text>No hay reservas hechas...</Text>}
-				</View>
+				<View style={styles.reservationContainer}>{hasReservations ? <FlatList data={reservations} renderItem={renderReservationItem} keyExtractor={(item) => `${item.id}`} pagingEnabled={true} showsVerticalScrollIndicator={false} contentContainerStyle={{ flexGrow: 1 }} /> : <Text>No hay reservas hechas...</Text>}</View>
 			</View>
-			<View style={styles.sectionBottom}>
+			{/* <View style={styles.sectionBottom}>
 				<Text style={styles.sectionTitle}>Agendar Hora</Text>
 				<View style={styles.reservationContainer}>
 					<Text style={styles.scheduleText}>¿Quieres agendar una hora?</Text>
 					<Button title='Agendar' onPress={handleScheduleAppointment} />
 				</View>
-			</View>
+			</View> */}
 		</SafeAreaView>
 	)
 }

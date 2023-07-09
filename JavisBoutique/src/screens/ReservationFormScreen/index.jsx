@@ -36,14 +36,12 @@ const ReservationFormScreen = () => {
 	}, [route.params])
 
 	const handleReservation = () => {
+		const timestamp = new Date().getTime()
+
 		if (!name || !lastName || !rut || !date || selectedServices.length === 0) {
 			Alert.alert('Datos Incompletos', 'Por favor, completa todos los campos')
 			return
 		}
-
-		console.log(selectedServices)
-
-		setTimestamp(moment())
 
 		const reservation = {
 			name,
@@ -56,8 +54,12 @@ const ReservationFormScreen = () => {
 		}
 
 		dispatch(addReservation(reservation))
-		console.log(reservation)
-		navigation.navigate('ReservationConfirm', { reservation })
+			.then(() => {
+				navigation.navigate('ReservationConfirm', { reservation: { ...reservation, timestamp } })
+			})
+			.catch((error) => {
+				console.log(error)
+			})
 	}
 
 	const handleCalendarModalToggle = () => {
