@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text, View, TouchableOpacity, FlatList, Image, Button } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, FlatList, Image, Button, SafeAreaView } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
 import { useSelector } from 'react-redux'
@@ -31,7 +31,8 @@ const ServiceScreen = () => {
 	const renderServiceItem = ({ item }) => {
 		const handleMoreInfoPress = () => {
 			const service = services.find((service) => service.id === item.id)
-			navigation.navigate('ServiceDetail', { service })
+			const category = categories.find((category) => category.id === item.categoryId)
+			navigation.navigate('ServiceDetail', { serviceId: service.id, categoryId: category.id })
 		}
 
 		return (
@@ -65,9 +66,21 @@ const ServiceScreen = () => {
 		/>
 	)
 
+	const handleBackPress = () => {
+		navigation.goBack()
+	}
+
 	return (
-		<View style={styles.container}>
-			<Text style={styles.title}>Servicios</Text>
+		<SafeAreaView style={styles.container}>
+			<View style={styles.headerContainer}>
+				<View style={styles.headerSection}>
+					<TouchableOpacity onPress={handleBackPress} style={styles.headerSection}>
+						<Ionicons name='arrow-back' size={24} color='black' />
+					</TouchableOpacity>
+				</View>
+				<Text style={styles.title}>Servicios</Text>
+				<View style={styles.headerSection}></View>
+			</View>
 			<View style={styles.sectionServices}>{renderCategoryList()}</View>
 			<View style={styles.sectionSelected}>
 				<Text style={styles.selectedServicesTitle}>Servicios seleccionados:</Text>
@@ -91,19 +104,36 @@ const ServiceScreen = () => {
 			<View style={styles.scheduleButtonContainer}>
 				<Button title='Agendar Hora' onPress={handleSchedulePress} />
 			</View>
-		</View>
+		</SafeAreaView>
 	)
 }
 
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		padding: 16,
+		backgroundColor: '#F5FCFF',
+	},
+	headerContainer: {
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'space-between',
+		paddingHorizontal: 15,
+		marginBottom: 20,
 	},
 	title: {
-		fontSize: 24,
+		fontSize: 32,
 		fontWeight: 'bold',
-		marginBottom: 16,
+		marginBottom: 20,
+	},
+	headerSection: {
+		width: 40,
+	},
+	section: {
+		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'center',
+		margin: 10,
+		width: '100%',
 	},
 	sectionServices: {
 		flex: 2,

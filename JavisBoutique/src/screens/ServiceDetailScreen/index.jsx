@@ -9,10 +9,12 @@ const ServiceDetailScreen = ({ route }) => {
 	const service = services.find((service) => service.id === serviceId)
 	const category = categories.find((category) => category.id === categoryId)
 
-	if (!service) {
+	console.log(serviceId)
+
+	if (!services || !categories) {
 		return (
 			<View style={styles.container}>
-				<Text>Service not found</Text>
+				<Text>Loading...</Text>
 			</View>
 		)
 	}

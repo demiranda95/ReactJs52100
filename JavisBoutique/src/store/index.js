@@ -7,7 +7,8 @@ import reservationsReducer from './reducers/reservations.reducer'
 import productsReducer from './reducers/products.reducer'
 import servicesReducer from './reducers/services.reducer'
 import categoriesReducer from './reducers/categories.reducer'
-import AuthReducer from './reducers/auth.reducer'
+import authReducer from './reducers/auth.reducer'
+import carouselReducer from './reducers/carousel.reducer'
 
 const rootReducer = combineReducers({
 	cart: cartReducer,
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
 	products: productsReducer,
 	services: servicesReducer,
 	categories: categoriesReducer,
-	auth: AuthReducer,
+	auth: authReducer,
+	carousel: carouselReducer,
 })
 
 export default createStore(rootReducer, applyMiddleware(thunk))

@@ -14,7 +14,7 @@ export const addReservation = (reservation) => {
 			console.log(result)
 			dispatch({
 				type: 'ADD_RESERVATION',
-				payload: result, // Puedes utilizar el resultado devuelto por Firebase como el payload de la acción
+				payload: result,
 			})
 		} catch (error) {
 			console.log(error)
@@ -34,7 +34,6 @@ export const deleteReservation = (reservationId) => {
 				payload: reservationId,
 			})
 		} catch (error) {
-			// Manejar el error en caso de que ocurra
 			console.log(error)
 		}
 	}
@@ -45,14 +44,17 @@ export const fetchReservations = () => {
 		try {
 			const response = await fetch(`${URL_API}/reservations.json`)
 			const result = await response.json()
-			const reservations = Object.keys(result).map((key) => ({
-				id: key,
-				...result[key],
-			}))
-			dispatch({
-				type: 'FETCH_RESERVATIONS',
-				payload: reservations,
-			})
+
+			if (result !== null) {
+				const reservations = Object.keys(result).map((key) => ({
+					id: key,
+					...result[key],
+				}))
+				dispatch({
+					type: 'FETCH_RESERVATIONS',
+					payload: reservations,
+				})
+			}
 		} catch (error) {
 			console.log(error)
 		}

@@ -1,15 +1,15 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 import AuthScreen from '../screens/AuthScreen'
-import SignUpScreen from '../screens/SignUpScreen'
+import CompleteProfileScreen from '../screens/CompleteProfileScreen'
 
 const Stack = createStackNavigator()
 
 const AuthNavigator = () => {
 	return (
 		<Stack.Navigator>
-			<Stack.Screen name='Auth' component={AuthScreen} options={{ headerShown: false }} />
-			<Stack.Screen name='SignUp' component={SignUpScreen} options={{ headerShown: false, title: 'Registro' }} />
+			<Stack.Screen name='AuthScreen' component={AuthScreen} options={{ headerShown: false }} />
+			<Stack.Screen name='CompleteProfile' component={CompleteProfileScreen} options={{ title: 'Completar Perfil' }} />
 		</Stack.Navigator>
 	)
 }

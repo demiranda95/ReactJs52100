@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, TextInput, Button, FlatList, StyleSheet, Alert, TouchableOpacity, Modal } from 'react-native'
+import { View, Text, TextInput, Button, FlatList, StyleSheet, Alert, TouchableOpacity, Modal, SafeAreaView } from 'react-native'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import moment from 'moment'
 import PickerSelect from 'react-native-picker-select'
 import CalendarPicker from 'react-native-calendar-picker'
 import { useDispatch, useSelector } from 'react-redux'
 import { addReservation } from '../../store/actions/reservations.action'
+import { Ionicons } from '@expo/vector-icons'
 
 const ReservationFormScreen = () => {
 	const services = useSelector((state) => state.services.services)
@@ -93,10 +94,20 @@ const ReservationFormScreen = () => {
 		)
 	}
 
+	const handleBackPress = () => {
+		navigation.goBack()
+	}
+
 	return (
-		<View style={styles.container}>
-			<View style={styles.scroll}>
-				<Text style={styles.sectionTitle}>Formulario de Reserva</Text>
+		<SafeAreaView style={styles.container}>
+			<View style={styles.headerContainer}>
+				<TouchableOpacity onPress={handleBackPress} style={styles.backButton}>
+					<Ionicons name='arrow-back' size={24} color='black' />
+				</TouchableOpacity>
+				<Text style={styles.title}>Agendar Hora</Text>
+				<View style={styles.headerSection}></View>
+			</View>
+			<View style={styles.section}>
 				<View style={styles.inputContainer}>
 					<View style={styles.nameContainer}>
 						<View style={styles.nameInputContainer}>
@@ -168,17 +179,36 @@ const ReservationFormScreen = () => {
 			<View style={styles.scheduleButtonContainer}>
 				<Button title='Reservar' onPress={handleReservation} />
 			</View>
-		</View>
+		</SafeAreaView>
 	)
 }
 
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		padding: 20,
+		backgroundColor: '#F5FCFF',
 	},
-	scroll: {
-		flex: 2,
+	headerContainer: {
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'space-between',
+		paddingHorizontal: 15,
+		marginBottom: 20,
+	},
+	title: {
+		fontSize: 32,
+		fontWeight: 'bold',
+		marginBottom: 20,
+	},
+	headerSection: {
+		width: 40,
+	},
+	section: {
+		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'center',
+		margin: 10,
+		width: '100%',
 	},
 	sectionTitle: {
 		fontSize: 24,
@@ -187,6 +217,7 @@ const styles = StyleSheet.create({
 	},
 	inputContainer: {
 		marginBottom: 10,
+		width: '80%',
 	},
 	nameContainer: {
 		flexDirection: 'row',
@@ -200,6 +231,7 @@ const styles = StyleSheet.create({
 		fontSize: 16,
 		fontWeight: 'bold',
 		marginBottom: 5,
+		color: '#888',
 	},
 	sublabel: {
 		fontSize: 16,

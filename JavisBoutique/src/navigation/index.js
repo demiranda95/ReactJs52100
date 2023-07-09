@@ -1,12 +1,30 @@
-import { useState } from 'react'
-import AuthNavigator from './AuthNavigator'
-import MainNavigator from './MainNavigator'
+import { createStackNavigator } from '@react-navigation/stack'
 import { NavigationContainer } from '@react-navigation/native'
-import { useSelector } from 'react-redux'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+
+import AuthScreen from '../screens/AuthScreen'
+import { useEffect, useState } from 'react'
+import MainNavigator from '../navigation/MainNavigator'
+import { useDispatch } from 'react-redux'
+
+const Stack = createStackNavigator()
 
 const AppNavigator = () => {
-	const userId = useSelector((state) => state.auth.userId)
-	return <NavigationContainer>{userId ? <MainNavigator /> : <AuthNavigator />}</NavigationContainer>
+	const [userId, setUserId] = useState(null)
+
+	useEffect(() => {
+		const checkLoggedIn = async () => {
+			const storedUserId = await AsyncStorage.getItem('userId')
+			setUserId(storedUserId)
+		}
+		checkLoggedIn()
+	}, [])
+
+	return (
+		<NavigationContainer>
+			<Stack.Navigator>{userId == null ? <Stack.Screen name='AuthScreen' component={AuthScreen} options={{ headerShown: false }} /> : <Stack.Screen name='Main' component={MainNavigator} options={{ headerShown: false }} />}</Stack.Navigator>
+		</NavigationContainer>
+	)
 }
 
 export default AppNavigator

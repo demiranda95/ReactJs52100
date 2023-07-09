@@ -2,20 +2,21 @@ import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { Ionicons } from '@expo/vector-icons'
 import { COLORS } from '../constants/colors'
-import HomeScreen from '../screens/HomeScreen'
 import ContactScreen from '../screens/ContactScreen'
 import StoreNavigator from './StoreNavigator'
 import ReservationScreen from '../screens/ReservationScreen'
 import CartNavigator from './CartNavigator'
+import HomeNavigator from './HomeNavigator'
 
 const Tab = createBottomTabNavigator()
 
 const screens = [
 	{
 		name: 'Home',
-		component: HomeScreen,
+		component: HomeNavigator,
 		title: 'Inicio',
 		iconName: 'home',
+		headerShown: false,
 	},
 	{
 		name: 'Store',

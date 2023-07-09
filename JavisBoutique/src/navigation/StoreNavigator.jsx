@@ -7,7 +7,7 @@ import StoreScreen, { services, products } from '../screens/StoreScreen'
 import ProductDetailScreen from '../screens/ProductDetailScreen'
 import ServiceDetailScreen from '../screens/ServiceDetailScreen'
 import { TouchableOpacity, View } from 'react-native'
-import { Ionicons } from 'react-native-vector-icons'
+import { Ionicons } from '@expo/vector-icons'
 import ReservationConfirmationScreen from '../screens/ReservationConfirmScreen'
 import { useSelector } from 'react-redux'
 
@@ -18,23 +18,16 @@ const ServiceStackNavigator = () => {
 
 	return (
 		<Stack.Navigator>
-			<Stack.Screen name='ServicesScreen' component={ServiceScreen} options={{ title: 'Servicios', headerBackTitle: 'Tienda' }} />
+			<Stack.Screen name='ServicesScreen' component={ServiceScreen} options={{ headerShown: false }} />
 			<Stack.Screen
 				name='ServiceDetail'
 				component={ServiceDetailScreen}
 				options={({ route }) => ({
 					title: services.find((service) => service.id === route.params.serviceId)?.title || 'Detalle del servicio',
 					headerBackTitle: 'Servicios',
-					headerRight: () => (
-						<TouchableOpacity onPress={() => navigation.navigate('Cart')}>
-							<View style={{ paddingHorizontal: 10 }}>
-								<Ionicons name='ios-cart' size={24} color='#000' />
-							</View>
-						</TouchableOpacity>
-					),
 				})}
 			/>
-			<Stack.Screen name='ReservationForm' component={ReservationFormScreen} options={{ title: '', headerBackTitle: 'Regresar' }} />
+			<Stack.Screen name='ReservationForm' component={ReservationFormScreen} options={{ headerShown: false }} />
 			<Stack.Screen name='ReservationConfirm' component={ReservationConfirmationScreen} options={{ headerShown: false }} />
 		</Stack.Navigator>
 	)
@@ -93,13 +86,6 @@ const StoreNavigator = ({ navigation }) => {
 				options={({ route }) => ({
 					title: services.find((service) => service.id === route.params.serviceId)?.title || 'Detalle del servicio',
 					headerBackTitle: 'Servicios',
-					headerRight: () => (
-						<TouchableOpacity onPress={() => navigation.navigate('Cart')}>
-							<View style={{ paddingHorizontal: 10 }}>
-								<Ionicons name='ios-cart' size={24} color='#000' />
-							</View>
-						</TouchableOpacity>
-					),
 				})}
 			/>
 			<Stack.Screen
