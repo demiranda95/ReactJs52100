@@ -5,7 +5,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import AuthScreen from '../screens/AuthScreen'
 import { useEffect, useState } from 'react'
 import MainNavigator from '../navigation/MainNavigator'
-import { useDispatch } from 'react-redux'
 
 const Stack = createStackNavigator()
 

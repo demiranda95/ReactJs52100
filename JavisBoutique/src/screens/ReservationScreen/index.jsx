@@ -103,13 +103,6 @@ const ReservationScreen = () => {
 				<Text style={styles.sectionTitle}>Horas Agendadas</Text>
 				<View style={styles.reservationContainer}>{hasReservations ? <FlatList data={reservations} renderItem={renderReservationItem} keyExtractor={(item) => `${item.id}`} pagingEnabled={true} showsVerticalScrollIndicator={false} contentContainerStyle={{ flexGrow: 1 }} /> : <Text>No hay reservas hechas...</Text>}</View>
 			</View>
-			{/* <View style={styles.sectionBottom}>
-				<Text style={styles.sectionTitle}>Agendar Hora</Text>
-				<View style={styles.reservationContainer}>
-					<Text style={styles.scheduleText}>¿Quieres agendar una hora?</Text>
-					<Button title='Agendar' onPress={handleScheduleAppointment} />
-				</View>
-			</View> */}
 		</SafeAreaView>
 	)
 }

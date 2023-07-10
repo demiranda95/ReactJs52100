@@ -6,8 +6,6 @@ import ReservationFormScreen from '../screens/ReservationFormScreen'
 import StoreScreen, { services, products } from '../screens/StoreScreen'
 import ProductDetailScreen from '../screens/ProductDetailScreen'
 import ServiceDetailScreen from '../screens/ServiceDetailScreen'
-import { TouchableOpacity, View } from 'react-native'
-import { Ionicons } from '@expo/vector-icons'
 import ReservationConfirmationScreen from '../screens/ReservationConfirmScreen'
 import { useSelector } from 'react-redux'
 
@@ -33,76 +31,29 @@ const ServiceStackNavigator = () => {
 	)
 }
 
-const ProductStackNavigator = ({ navigation }) => {
-	const products = useSelector((state) => state.products.products)
+const ProductStackNavigator = () => {
 	return (
 		<Stack.Navigator>
 			<Stack.Screen
 				name='ProductScreen'
 				component={ProductScreen}
 				options={{
-					title: 'Productos',
-					headerBackTitle: 'Tienda',
-					headerRight: () => (
-						<TouchableOpacity onPress={() => navigation.navigate('Cart')}>
-							<View style={{ paddingHorizontal: 10 }}>
-								<Ionicons name='ios-cart' size={24} color='#000' />
-							</View>
-						</TouchableOpacity>
-					),
+					headerShown: false,
 				}}
 			/>
-			<Stack.Screen
-				name='ProductDetail'
-				component={ProductDetailScreen}
-				options={({ route }) => ({
-					title: products.find((product) => product.id === route.params.productId)?.title || 'Detalle del producto',
-					headerBackTitle: 'Productos',
-					headerRight: () => (
-						<TouchableOpacity onPress={() => navigation.navigate('Cart')}>
-							<View style={{ paddingHorizontal: 10 }}>
-								<Ionicons name='ios-cart' size={24} color='#000' />
-							</View>
-						</TouchableOpacity>
-					),
-				})}
-			/>
+			<Stack.Screen name='ProductDetail' component={ProductDetailScreen} options={{ headerShown: false }} />
 		</Stack.Navigator>
 	)
 }
 
-const StoreNavigator = ({ navigation }) => {
-	const products = useSelector((state) => state.products.products)
-	const services = useSelector((state) => state.services.services)
-
+const StoreNavigator = () => {
 	return (
-		<Stack.Navigator>
-			<Stack.Screen name='StoreScreen' component={StoreScreen} options={{ headerShown: false }} />
-			<Stack.Screen name='Services' component={ServiceStackNavigator} options={{ headerShown: false }} />
-			<Stack.Screen name='Products' component={ProductStackNavigator} options={{ headerShown: false }} />
-			<Stack.Screen
-				name='ServiceDetail'
-				component={ServiceDetailScreen}
-				options={({ route }) => ({
-					title: services.find((service) => service.id === route.params.serviceId)?.title || 'Detalle del servicio',
-					headerBackTitle: 'Servicios',
-				})}
-			/>
-			<Stack.Screen
-				name='ProductDetail'
-				component={ProductDetailScreen}
-				options={({ route }) => ({
-					title: products.find((product) => product.id === route.params.productId)?.title || 'Detalle del producto',
-					headerBackTitle: 'Productos',
-					headerRight: () => (
-						<TouchableOpacity onPress={() => navigation.navigate('Cart')}>
-							<View style={{ paddingHorizontal: 10 }}>
-								<Ionicons name='ios-cart' size={24} color='#000' />
-							</View>
-						</TouchableOpacity>
-					),
-				})}
-			/>
+		<Stack.Navigator screenOptions={{ headerShown: false }}>
+			<Stack.Screen name='StoreScreen' component={StoreScreen} />
+			<Stack.Screen name='Services' component={ServiceStackNavigator} />
+			<Stack.Screen name='Products' component={ProductStackNavigator} />
+			<Stack.Screen name='ServiceDetail' component={ServiceDetailScreen} />
+			<Stack.Screen name='ProductDetail' component={ProductDetailScreen} />
 		</Stack.Navigator>
 	)
 }

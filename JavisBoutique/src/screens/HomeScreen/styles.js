@@ -1,29 +1,30 @@
 import { StyleSheet } from 'react-native'
+import { COLORS } from '../../constants/colors'
 
 export default styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center',
-		backgroundColor: '#F5FCFF',
+		backgroundColor: COLORS.background,
 	},
 	headerContainer: {
 		flexDirection: 'row',
 		alignItems: 'center',
 		justifyContent: 'space-between',
-		width: '100%',
 		paddingHorizontal: 15,
-		marginBottom: 20,
-	},
-	title: {
-		fontSize: 32,
-		fontWeight: 'bold',
 		marginBottom: 20,
 	},
 	headerSection: {
 		width: 40,
 	},
-	profileButton: {},
+	logo: {
+		flex: 1,
+		alignItems: 'center',
+	},
+	logoImage: {
+		width: 200,
+		height: 100,
+		resizeMode: 'contain',
+	},
 	section: {
 		flex: 1,
 		justifyContent: 'center',
@@ -32,27 +33,9 @@ export default styles = StyleSheet.create({
 		width: '100%',
 	},
 	sectionTitle: {
-		fontSize: 20,
+		fontSize: 24,
 		fontWeight: 'bold',
-		textAlign: 'left',
-		marginVertical: 10,
-		marginLeft: 15,
-	},
-	reservationContainer: {
-		flex: 1,
-		backgroundColor: '#F2D4D9',
-		borderRadius: 20,
-		marginHorizontal: 15,
-		justifyContent: 'center',
-		alignItems: 'center',
-		width: '92%',
-	},
-	reservationItemContainer: {
-		flex: 1,
-		margin: 10,
-		flexDirection: 'row',
-		justifyContent: 'space-between',
-		alignItems: 'center',
+		marginBottom: 20,
 	},
 	itemInfoContainer: {
 		flex: 1,
@@ -77,7 +60,7 @@ export default styles = StyleSheet.create({
 		fontSize: 24,
 	},
 	carouselItem: {
-		backgroundColor: 'white',
+		backgroundColor: COLORS.white,
 		borderRadius: 10,
 		overflow: 'hidden',
 		height: '100%',
@@ -100,13 +83,13 @@ export default styles = StyleSheet.create({
 		borderBottomRightRadius: 10,
 	},
 	cardTitle: {
-		color: 'white',
+		color: COLORS.white,
 		fontSize: 18,
 		fontWeight: 'bold',
 		marginBottom: 5,
 	},
 	cardDescription: {
-		color: 'white',
+		color: COLORS.white,
 		fontSize: 14,
 	},
 	paginationContainer: {

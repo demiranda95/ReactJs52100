@@ -9,6 +9,7 @@ import { fetchServices } from '../../store/actions/services.action'
 import { fetchCategories } from '../../store/actions/categories.action'
 import { fetchReservations } from '../../store/actions/reservations.action'
 import { fetchCarousel } from '../../store/actions/carousel.action'
+import { COLORS } from '../../constants/colors'
 
 const HomeScreen = ({ navigation }) => {
 	const loadingProducts = useSelector((state) => state.products.loading)
@@ -64,15 +65,13 @@ const HomeScreen = ({ navigation }) => {
 			<View style={styles.headerContainer}>
 				<View style={styles.headerSection}>
 					<TouchableOpacity style={styles.profileButton} onPress={handleToggleDrawer}>
-						<Ionicons name='menu-outline' size={24} color='black' />
+						<Ionicons name='menu-outline' size={24} color={COLORS.primary} />
 					</TouchableOpacity>
 				</View>
-				<Text style={styles.title}>Javi's Boutique</Text>
-				<View style={styles.headerSection}>
-					<TouchableOpacity style={styles.profileButton} onPress={() => navigation.navigate('Profile')}>
-						{/* <Ionicons name='person-circle-outline' size={24} color='black' /> */}
-					</TouchableOpacity>
+				<View style={styles.logo}>
+					<Image source={require('../../assets/logo.png')} style={styles.logoImage} />
 				</View>
+				<View style={styles.headerSection}></View>
 			</View>
 			<View style={styles.section}>
 				<Text style={styles.sectionTitle}>Últimos Trabajos</Text>

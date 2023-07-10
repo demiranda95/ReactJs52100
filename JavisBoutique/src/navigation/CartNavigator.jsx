@@ -9,7 +9,7 @@ const Stack = createStackNavigator()
 
 const CartNavigator = () => {
 	return (
-		<Stack.Navigator>
+		<Stack.Navigator screenOptions={{ headerShown: false }}>
 			<Stack.Screen
 				name='CartScreen'
 				component={CartScreen}

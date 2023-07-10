@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, View, Text, TouchableOpacity, Image, ActivityIndicator } from 'react-native'
+import { View, Text, TouchableOpacity, Image, ActivityIndicator, SafeAreaView } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import { useDispatch, useSelector } from 'react-redux'
 import { addToCart } from '../../store/actions/cart.action'
+import styles from './styles'
+import { useNavigation } from '@react-navigation/native'
 
 const ProductDetailScreen = ({ route }) => {
 	const { productId } = route.params
 	const products = useSelector((state) => state.products.products)
 	const loading = useSelector((state) => state.products.loading)
 	const error = useSelector((state) => state.products.error)
-	const dispatch = useDispatch()
 	const [product, setProduct] = useState(null)
+	const dispatch = useDispatch()
+	const navigation = useNavigation()
 
 	if (loading) {
 		return (
@@ -47,11 +50,27 @@ const ProductDetailScreen = ({ route }) => {
 		)
 	}
 
+	const handleBackPress = () => {
+		navigation.goBack()
+	}
+
 	return (
-		<View style={styles.container}>
+		<SafeAreaView style={styles.container}>
+			<View style={styles.headerContainer}>
+				<TouchableOpacity onPress={handleBackPress} style={styles.backButton}>
+					<Ionicons name='arrow-back' size={24} color='black' />
+				</TouchableOpacity>
+				<Text style={styles.title}>{product.title}</Text>
+				<View style={styles.headerSection}>
+					<TouchableOpacity onPress={() => navigation.navigate('Cart')}>
+						<View style={{ paddingHorizontal: 10 }}>
+							<Ionicons name='ios-cart' size={24} color='#000' />
+						</View>
+					</TouchableOpacity>
+				</View>
+			</View>
 			<Image source={{ uri: product.image }} style={styles.image} />
 			<View style={styles.infoContainer}>
-				<Text style={styles.title}>{product.title}</Text>
 				<Text style={styles.description}>{product.description}</Text>
 			</View>
 			<View style={styles.buttonsContainer}>
@@ -71,80 +90,8 @@ const ProductDetailScreen = ({ route }) => {
 					<Text style={styles.addToCartButtonText}>Agregar al carrito</Text>
 				</TouchableOpacity>
 			</View>
-		</View>
+		</SafeAreaView>
 	)
 }
-
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		alignItems: 'center',
-		justifyContent: 'center',
-		marginHorizontal: 20,
-	},
-	image: {
-		flex: 2,
-		width: '120%',
-		height: 300,
-		resizeMode: 'cover',
-	},
-	infoContainer: {
-		flex: 1,
-	},
-	buttonsContainer: {
-		flex: 1,
-	},
-	title: {
-		fontSize: 24,
-		fontWeight: 'bold',
-		marginTop: 20,
-		textAlign: 'center',
-	},
-	description: {
-		fontSize: 16,
-		marginTop: 10,
-		textAlign: 'center',
-	},
-	quantityContainer: {
-		flexDirection: 'row',
-		alignItems: 'center',
-		marginTop: 20,
-	},
-	quantityText: {
-		fontSize: 16,
-		marginRight: 10,
-	},
-	quantityButtons: {
-		flexDirection: 'row',
-		alignItems: 'center',
-		borderRadius: 5,
-		paddingVertical: 8,
-		paddingHorizontal: 16,
-	},
-	quantityButtonText: {
-		fontSize: 18,
-	},
-	quantity: {
-		fontSize: 22,
-		marginHorizontal: 40,
-	},
-	addToCartButton: {
-		marginTop: 20,
-		backgroundColor: '#007bff',
-		padding: 10,
-		borderRadius: 5,
-		flexDirection: 'row',
-		alignItems: 'center',
-	},
-	cartIcon: {
-		marginRight: 10,
-	},
-	addToCartButtonText: {
-		color: '#fff',
-		fontSize: 16,
-		fontWeight: 'bold',
-		textAlign: 'center',
-	},
-})
 
 export default ProductDetailScreen

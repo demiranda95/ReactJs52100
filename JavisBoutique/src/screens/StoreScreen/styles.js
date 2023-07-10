@@ -4,7 +4,7 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		backgroundColor: '#fff',
-		paddingTop: 16,
+		paddingTop: 30,
 	},
 	optionSection: {
 		flexDirection: 'row',
@@ -29,9 +29,9 @@ const styles = StyleSheet.create({
 		left: 0,
 		right: 0,
 		top: 0,
-		backgroundColor: 'rgba(0, 0, 0, 0.6)',
+		backgroundColor: 'rgba(0, 0, 0, 0.4)',
 		paddingVertical: 8,
-		paddingHorizontal: 16,
+		paddingHorizontal: 15,
 		justifyContent: 'center',
 		alignItems: 'center',
 	},
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
 		borderRadius: 8,
 	},
 	itemTitle: {
-		fontSize: 14,
+		fontSize: 12,
 		textAlign: 'center',
 		color: '#fff',
 		fontWeight: 'bold',

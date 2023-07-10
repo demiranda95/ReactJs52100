@@ -1,10 +1,14 @@
 import React, { useEffect } from 'react'
-import { StyleSheet, Text, View, FlatList } from 'react-native'
+import { Text, View, FlatList, TouchableOpacity, SafeAreaView } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchOrders } from '../../store/actions/cart.action'
+import { Ionicons } from '@expo/vector-icons'
+import styles from './styles'
+import { useNavigation } from '@react-navigation/native'
 
 const OrdersScreen = () => {
 	const dispatch = useDispatch()
+	const navigation = useNavigation()
 	const orders = useSelector((state) => state.cart.orders)
 
 	useEffect(() => {
@@ -29,34 +33,30 @@ const OrdersScreen = () => {
 		</View>
 	)
 
+	const handleBackPress = () => {
+		navigation.goBack()
+	}
+
 	return (
-		<View style={styles.container}>
-			<Text style={styles.title}>Órdenes Anteriores</Text>
-			<FlatList data={orders} renderItem={renderOrder} keyExtractor={(item) => item.id.toString()} />
-		</View>
+		<SafeAreaView style={styles.container}>
+			<View style={styles.headerContainer}>
+				<View style={styles.headerSection}>
+					<TouchableOpacity onPress={handleBackPress} style={styles.backButton}>
+						<Ionicons name='arrow-back' size={24} color='black' />
+					</TouchableOpacity>
+				</View>
+				<Text style={styles.title}>Ordenes</Text>
+				<View style={styles.headerSection}>
+					<TouchableOpacity onPress={handleBackPress} style={styles.backButton}>
+						{/* <Ionicons name='arrow-back' size={24} color='black' /> */}
+					</TouchableOpacity>
+				</View>
+			</View>
+			<View style={styles.section}>
+				<FlatList data={orders} renderItem={renderOrder} keyExtractor={(item) => item.id.toString()} />
+			</View>
+		</SafeAreaView>
 	)
 }
-
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		padding: 16,
-	},
-	title: {
-		fontSize: 24,
-		fontWeight: 'bold',
-		marginBottom: 16,
-	},
-	orderContainer: {
-		marginBottom: 8,
-		borderWidth: 1,
-		borderColor: 'gray',
-		padding: 8,
-	},
-	orderText: {
-		fontSize: 16,
-		marginBottom: 4,
-	},
-})
 
 export default OrdersScreen

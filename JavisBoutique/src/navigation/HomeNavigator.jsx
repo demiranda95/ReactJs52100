@@ -41,10 +41,9 @@ const CustomDrawerContent = ({ navigation }) => {
 
 	return (
 		<DrawerContentScrollView>
-			{/* Your custom drawer content */}
 			<DrawerItem label='Inicio' onPress={() => navigation.navigate('HomeScreen')} />
-			<DrawerItem label='Profile' onPress={() => navigation.navigate('Profile')} />
-			<DrawerItem label='Sign Out' onPress={showSignOutConfirmation} />
+			<DrawerItem label='Perfil' onPress={() => navigation.navigate('Profile')} />
+			<DrawerItem label='Cerrar Sesión' onPress={showSignOutConfirmation} />
 		</DrawerContentScrollView>
 	)
 }

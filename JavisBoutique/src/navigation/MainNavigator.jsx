@@ -49,8 +49,8 @@ const MainNavigator = () => {
 		<Tab.Navigator
 			screenOptions={({ route }) => ({
 				headerShown: false,
-				tabBarStyle: { backgroundColor: COLORS.dark },
-				tabBarActiveTintColor: COLORS.primary,
+				tabBarStyle: { backgroundColor: COLORS.primary },
+				tabBarActiveTintColor: COLORS.white,
 				tabBarInactiveTintColor: COLORS.white,
 				tabBarIcon: ({ color, size }) => {
 					const screen = screens.find((item) => item.name === route.name)

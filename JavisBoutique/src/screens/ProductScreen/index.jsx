@@ -1,69 +1,50 @@
 import React from 'react'
-import { StyleSheet, ScrollView, View, Image, Text, Dimensions, TouchableOpacity } from 'react-native'
+import { ScrollView, View, Image, Text, Dimensions, TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { useSelector } from 'react-redux'
-
-const windowWidth = Dimensions.get('window').width
-const itemWidth = (windowWidth - 45) / 2
+import { SafeAreaView } from 'react-native-safe-area-context'
+import { Ionicons } from '@expo/vector-icons'
+import styles from './styles'
 
 const ProductScreen = () => {
 	const products = useSelector((state) => state.products.products)
 	const navigation = useNavigation()
+
+	const handleBackPress = () => {
+		navigation.goBack()
+	}
+
 	return (
-		<ScrollView contentContainerStyle={styles.container}>
-			<View style={styles.itemsContainer}>
-				{products.map((product) => (
-					<TouchableOpacity style={styles.itemContainer} key={product.id} onPress={() => navigation.navigate('ProductDetail', { productId: product.id })}>
-						<Image source={{ uri: product.image }} style={styles.itemImage} />
-						<View style={styles.itemOverlay}>
-							<Text style={styles.itemTitle}>{product.title}</Text>
+		<SafeAreaView style={styles.container}>
+			<View style={styles.headerContainer}>
+				<View style={styles.headerSection}>
+					<TouchableOpacity onPress={handleBackPress} style={styles.backButton}>
+						<Ionicons name='arrow-back' size={24} color='black' />
+					</TouchableOpacity>
+				</View>
+				<Text style={styles.title}>Productos</Text>
+				<View style={styles.headerSection}>
+					<TouchableOpacity onPress={() => navigation.navigate('Cart')}>
+						<View style={{ paddingHorizontal: 10 }}>
+							<Ionicons name='ios-cart' size={24} color='#000' />
 						</View>
 					</TouchableOpacity>
-				))}
+				</View>
 			</View>
-		</ScrollView>
+			<ScrollView contentContainerStyle={styles.section}>
+				<View style={styles.itemsContainer}>
+					{products.map((product) => (
+						<TouchableOpacity style={styles.itemContainer} key={product.id} onPress={() => navigation.navigate('ProductDetail', { productId: product.id })}>
+							<Image source={{ uri: product.image }} style={styles.itemImage} />
+							<View style={styles.itemOverlay}>
+								<Text style={styles.itemTitle}>{product.title}</Text>
+							</View>
+						</TouchableOpacity>
+					))}
+				</View>
+			</ScrollView>
+		</SafeAreaView>
 	)
 }
-
-const styles = StyleSheet.create({
-	container: {
-		paddingVertical: 20,
-		paddingHorizontal: 15,
-	},
-	itemsContainer: {
-		flexDirection: 'row',
-		flexWrap: 'wrap',
-		justifyContent: 'space-between',
-	},
-	itemContainer: {
-		width: itemWidth,
-		marginBottom: 15,
-	},
-	itemImage: {
-		width: '100%',
-		aspectRatio: 1,
-		resizeMode: 'cover',
-		borderRadius: 8,
-	},
-	itemOverlay: {
-		position: 'absolute',
-		bottom: 0,
-		left: 0,
-		right: 0,
-		top: 130,
-		backgroundColor: 'rgba(0, 0, 0, 0.6)',
-		paddingVertical: 5,
-		paddingHorizontal: 5,
-		justifyContent: 'center',
-		alignItems: 'center',
-		borderRadius: 8,
-	},
-	itemTitle: {
-		fontSize: 14,
-		textAlign: 'center',
-		color: '#fff',
-		fontWeight: 'bold',
-	},
-})
 
 export default ProductScreen

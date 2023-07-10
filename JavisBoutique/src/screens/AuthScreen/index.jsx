@@ -84,9 +84,9 @@ const AuthScreen = () => {
 			<View style={styles.container}>
 				<Input id='email' label='Email' keyboardType='email-address' required email autoCapitalize='none' errorText='Por favor ingrese un email válido' onInputChange={onInputChangeHandler} initialValue='' />
 				<Input id='password' label='Password' keyboardType='default' required password secureTextEntry autoCapitalize='none' errorText='Por favor ingrese una contraseña válida' onInputChange={onInputChangeHandler} initialValue='' />
-				<Button title='Iniciar sesión' onPress={handleLogin} color='#fff' />
+				<Button title='Iniciar sesión' onPress={handleLogin} color='pink' />
 				<Text style={styles.registerText}>¿No estás registrado?</Text>
-				<Button title='Registrar' onPress={handleSignUp} color='#fff' />
+				<Button title='Registrar' onPress={handleSignUp} color='pink' />
 			</View>
 		</ImageBackground>
 	)

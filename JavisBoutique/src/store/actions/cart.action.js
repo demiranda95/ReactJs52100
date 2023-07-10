@@ -15,7 +15,7 @@ export const addToCart = (product, quantity) => ({
 
 export const removeFromCart = (productId) => ({
 	type: REMOVE_FROM_CART,
-	productId,
+	payload: productId,
 })
 
 export const confirmCart = (items, total) => {

@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text, View, TouchableOpacity, FlatList, Image, Button, SafeAreaView } from 'react-native'
+import { Text, View, TouchableOpacity, FlatList, Image, Button, SafeAreaView } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
 import { useSelector } from 'react-redux'
+import styles from './styles'
 
 const ServiceScreen = () => {
 	const services = useSelector((state) => state.services.services)
@@ -107,118 +108,5 @@ const ServiceScreen = () => {
 		</SafeAreaView>
 	)
 }
-
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: '#F5FCFF',
-	},
-	headerContainer: {
-		flexDirection: 'row',
-		alignItems: 'center',
-		justifyContent: 'space-between',
-		paddingHorizontal: 15,
-		marginBottom: 20,
-	},
-	title: {
-		fontSize: 32,
-		fontWeight: 'bold',
-		marginBottom: 20,
-	},
-	headerSection: {
-		width: 40,
-	},
-	section: {
-		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center',
-		margin: 10,
-		width: '100%',
-	},
-	sectionServices: {
-		flex: 2,
-	},
-	sectionSelected: {
-		flex: 1,
-	},
-	serviceItem: {
-		flexDirection: 'row',
-		alignItems: 'center',
-		marginBottom: 16,
-		padding: 16,
-		borderWidth: 1,
-		borderColor: 'gray',
-		borderRadius: 8,
-	},
-	serviceContent: {
-		flexDirection: 'row',
-		alignItems: 'center',
-	},
-	serviceImage: {
-		width: 90,
-		height: 90,
-		marginRight: 16,
-	},
-	serviceInfo: {
-		flex: 1,
-	},
-	serviceName: {
-		fontSize: 16,
-		fontWeight: 'bold',
-	},
-	servicePrice: {
-		fontSize: 14,
-		color: 'gray',
-	},
-	moreInfoButton: {
-		backgroundColor: 'lightgray',
-		borderRadius: 8,
-		padding: 15,
-		marginLeft: 'auto',
-	},
-	categoryTitle: {
-		fontSize: 20,
-		fontWeight: 'bold',
-		marginTop: 16,
-		marginBottom: 8,
-	},
-	selectedServicesTitle: {
-		fontSize: 18,
-		fontWeight: 'bold',
-		marginTop: 16,
-	},
-	selectedService: {
-		flexDirection: 'row',
-		alignItems: 'center',
-		marginBottom: 16,
-		padding: 16,
-		borderColor: 'gray',
-		borderRadius: 8,
-	},
-	selectedServiceItem: {
-		flexDirection: 'row',
-		alignItems: 'center',
-		marginBottom: 2,
-		padding: 5,
-		borderColor: 'gray',
-		borderRadius: 8,
-	},
-	selectedServiceLeft: {
-		flex: 1,
-	},
-	selectedServiceRight: {
-		marginLeft: 16,
-	},
-	selectedServiceName: {
-		fontSize: 16,
-	},
-	selectedServicePrice: {
-		fontSize: 16,
-		fontWeight: 'bold',
-	},
-	scheduleButtonContainer: {
-		marginTop: 16,
-	},
-})
 
 export default ServiceScreen

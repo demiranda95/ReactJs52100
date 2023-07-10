@@ -5,10 +5,10 @@ import { useSelector } from 'react-redux'
 const ReservationConfirm = ({ route, navigation }) => {
 	const services = useSelector((state) => state.services.services)
 	const { reservation } = route.params
-	console.log(reservation)
 
 	const handleHomeButtonPress = () => {
-		navigation.navigate('Store')
+		navigation.navigate('ServicesScreen')
+		navigation.navigate('Reservations')
 	}
 
 	return (

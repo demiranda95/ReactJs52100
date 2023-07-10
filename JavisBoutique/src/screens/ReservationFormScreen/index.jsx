@@ -7,11 +7,14 @@ import CalendarPicker from 'react-native-calendar-picker'
 import { useDispatch, useSelector } from 'react-redux'
 import { addReservation } from '../../store/actions/reservations.action'
 import { Ionicons } from '@expo/vector-icons'
+import styles from './styles'
 
 const ReservationFormScreen = () => {
 	const services = useSelector((state) => state.services.services)
 
 	const dispatch = useDispatch()
+	const navigation = useNavigation()
+	const route = useRoute()
 	const currentDate = new Date()
 
 	const timeData = ['9:00', '12:00', '15:00', '17:00']
@@ -22,12 +25,8 @@ const ReservationFormScreen = () => {
 	const [date, setDate] = useState(currentDate)
 	const [time, setTime] = useState(currentDate)
 	const [selectedServices, setSelectedServices] = useState([])
-	const [timestamp, setTimestamp] = useState(moment())
 	const [isCalendarVisible, setCalendarVisible] = useState(false)
 	const [selectedDate, setSelectedDate] = useState(null)
-
-	const navigation = useNavigation()
-	const route = useRoute()
 
 	useEffect(() => {
 		if (route.params?.selectedServiceIds) {
@@ -75,21 +74,24 @@ const ReservationFormScreen = () => {
 
 	const renderSelectedServices = () => {
 		return (
-			<View style={styles.selectedServicesContainer}>
+			<View style={styles.sectionSelected}>
 				<Text style={styles.selectedServicesTitle}>Servicios seleccionados:</Text>
-				<FlatList
-					data={selectedServices}
-					renderItem={({ item }) => {
-						const service = services.find((service) => service.id === item)
-						return (
-							<View style={styles.selectedServiceItem}>
-								<Text style={styles.selectedServiceName}>{service ? service.title : 'Error'}</Text>
-								<Text style={styles.selectedServicePrice}>{service ? `$${service.price}` : 'Error'}</Text>
+				{selectedServices.map((serviceId) => {
+					const service = services.find((service) => service.id === serviceId)
+					const serviceName = service?.title || `Servicio ${serviceId}`
+					const servicePrice = service?.price || ''
+
+					return (
+						<View key={serviceId} style={styles.selectedServiceItem}>
+							<View style={styles.selectedServiceLeft}>
+								<Text style={styles.selectedServiceName}>{serviceName}</Text>
 							</View>
-						)
-					}}
-					keyExtractor={(item) => item.toString()}
-				/>
+							<View style={styles.selectedServiceRight}>
+								<Text style={styles.selectedServicePrice}>${servicePrice}</Text>
+							</View>
+						</View>
+					)
+				})}
 			</View>
 		)
 	}
@@ -146,7 +148,7 @@ const ReservationFormScreen = () => {
 										selectedDayStyle={styles.selectedDay}
 										disabledDayTextStyle={styles.disabledDayText}
 									/>
-									<Button title='Cerrar' onPress={handleCalendarModalToggle} />
+									<Button title='Cerrar' onPress={handleCalendarModalToggle} style={styles.closeButton} />
 								</View>
 							</Modal>
 						</View>
@@ -168,11 +170,9 @@ const ReservationFormScreen = () => {
 					</View>
 				</View>
 				<View style={styles.inputContainer}>
-					<View style={styles.inputContainer}>
-						<Text style={styles.label}>Horarios:</Text>
-						<Text style={styles.label}>Lunes a Viernes</Text>
-						<Text style={styles.sublabel}>Si la hora seleccionada no se encuentra disponible, te notificaremos</Text>
-					</View>
+					<Text style={styles.label}>Horarios:</Text>
+					<Text style={styles.label}>Lunes a Viernes</Text>
+					<Text style={styles.sublabel}>Si la hora seleccionada no se encuentra disponible, te notificaremos</Text>
 				</View>
 			</View>
 			<View style={styles.sectionSelected}>{renderSelectedServices()}</View>
@@ -182,147 +182,5 @@ const ReservationFormScreen = () => {
 		</SafeAreaView>
 	)
 }
-
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: '#F5FCFF',
-	},
-	headerContainer: {
-		flexDirection: 'row',
-		alignItems: 'center',
-		justifyContent: 'space-between',
-		paddingHorizontal: 15,
-		marginBottom: 20,
-	},
-	title: {
-		fontSize: 32,
-		fontWeight: 'bold',
-		marginBottom: 20,
-	},
-	headerSection: {
-		width: 40,
-	},
-	section: {
-		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center',
-		margin: 10,
-		width: '100%',
-	},
-	sectionTitle: {
-		fontSize: 24,
-		fontWeight: 'bold',
-		marginBottom: 20,
-	},
-	inputContainer: {
-		marginBottom: 10,
-		width: '80%',
-	},
-	nameContainer: {
-		flexDirection: 'row',
-		justifyContent: 'space-between',
-	},
-	nameInputContainer: {
-		flex: 1,
-		marginRight: 10,
-	},
-	label: {
-		fontSize: 16,
-		fontWeight: 'bold',
-		marginBottom: 5,
-		color: '#888',
-	},
-	sublabel: {
-		fontSize: 16,
-		fontWeight: 'light',
-		marginBottom: 5,
-		fontStyle: 'italic',
-	},
-	input: {
-		height: 40,
-		borderWidth: 1,
-		borderColor: '#ccc',
-		borderRadius: 5,
-		paddingHorizontal: 10,
-	},
-	selectedServicesContainer: {
-		marginTop: 20,
-		marginBottom: 20,
-	},
-	selectedServicesTitle: {
-		fontSize: 18,
-		fontWeight: 'bold',
-		marginBottom: 10,
-	},
-	selectedServiceItem: {
-		flexDirection: 'row',
-		justifyContent: 'space-between',
-		alignItems: 'center',
-		marginBottom: 5,
-	},
-	selectedServiceName: {
-		fontSize: 16,
-	},
-	selectedServicePrice: {
-		fontSize: 16,
-		fontWeight: 'bold',
-	},
-	sectionSelected: {
-		flex: 1,
-	},
-	scheduleButtonContainer: {
-		marginTop: 16,
-	},
-	pickerSelectStyles: {
-		inputIOS: {
-			height: 40,
-			borderWidth: 1,
-			borderColor: '#ccc',
-			borderRadius: 5,
-			paddingHorizontal: 10,
-			textAlign: 'right',
-		},
-		inputAndroid: {
-			height: 40,
-			borderWidth: 1,
-			borderColor: '#ccc',
-			borderRadius: 5,
-			paddingHorizontal: 10,
-			textAlign: 'right',
-		},
-	},
-	dateInput: {
-		height: 40,
-		borderWidth: 1,
-		borderColor: '#ccc',
-		borderRadius: 5,
-		paddingHorizontal: 10,
-		justifyContent: 'center',
-	},
-	modalContainer: {
-		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center',
-		backgroundColor: '#fff',
-	},
-	dateText: {
-		fontSize: 16,
-		color: '#333',
-	},
-	todayText: {
-		fontWeight: 'bold',
-	},
-	selectedDayText: {
-		color: '#fff',
-		fontWeight: 'bold',
-	},
-	selectedDay: {
-		backgroundColor: 'blue',
-	},
-	disabledDayText: {
-		color: '#ccc',
-	},
-})
 
 export default ReservationFormScreen

@@ -30,11 +30,7 @@ const ProfileScreen = () => {
 					</TouchableOpacity>
 				</View>
 				<Text style={styles.title}>Perfil</Text>
-				<View style={styles.headerSection}>
-					<TouchableOpacity style={styles.profileButton} onPress={handleToggleDrawer}>
-						{/* <Ionicons name='menu-outline' size={24} color='black' /> */}
-					</TouchableOpacity>
-				</View>
+				<View style={styles.headerSection}></View>
 			</View>
 			<View style={styles.section}>
 				<View style={styles.inputContainer}>
