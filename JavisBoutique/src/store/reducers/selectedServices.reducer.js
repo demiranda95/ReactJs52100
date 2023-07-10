@@ -1,6 +1,5 @@
 import { ADD_SELECTED_SERVICE, REMOVE_SELECTED_SERVICE } from "../actions/selectedServices.action";
 
-// Reducer
 const initialState = [];
 
 const selectedServicesReducer = (state = initialState, action) => {

@@ -23,7 +23,7 @@ export const fetchCategories = () => {
 		dispatch(fetchCategoriesRequest())
 
 		try {
-			const categoriesData = categories // Obtener las categorías desde el archivo categories.js
+			const categoriesData = categories 
 
 			dispatch(fetchCategoriesSuccess(categoriesData))
 		} catch (error) {

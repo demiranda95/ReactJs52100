@@ -23,7 +23,7 @@ export const fetchServices = () => {
 		dispatch(fetchServicesRequest())
 
 		try {
-			const ServicesData = services // Obtener los productos desde el archivo SERVICES.js
+			const ServicesData = services 
 
 			dispatch(fetchServicesSuccess(ServicesData))
 		} catch (error) {

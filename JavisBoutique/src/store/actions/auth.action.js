@@ -31,7 +31,6 @@ export const signUp = (email, password) => {
 				userId: data.localId,
 			})
 
-			// Guardar userId en AsyncStorage
 			await AsyncStorage.setItem('userId', data.localId)
 		} catch (error) {
 			console.log(error)
@@ -64,7 +63,6 @@ export const signIn = (email, password) => {
 				userId: data.localId,
 			})
 
-			// Guardar userId en AsyncStorage
 			await AsyncStorage.setItem('userId', data.localId)
 		} catch (error) {
 			console.log(error)
@@ -75,7 +73,6 @@ export const signIn = (email, password) => {
 export const signOut = () => {
 	return async (dispatch) => {
 		try {
-			// Eliminar el valor de userId del AsyncStorage
 			await AsyncStorage.removeItem('userId')
 
 			dispatch({

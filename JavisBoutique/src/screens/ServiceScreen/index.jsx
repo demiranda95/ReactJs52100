@@ -8,7 +8,7 @@ import styles from './styles'
 const ServiceScreen = () => {
 	const services = useSelector((state) => state.services.services)
 	const categories = useSelector((state) => state.categories.categories)
-	const [selectedServices, setSelectedServices] = useState([]) // Estado local para almacenar los servicios seleccionados
+	const [selectedServices, setSelectedServices] = useState([]) 
 	const navigation = useNavigation()
 
 	const handleServicePress = (serviceId) => {

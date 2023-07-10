@@ -71,7 +71,6 @@ const styles = StyleSheet.create({
 		fontSize: 16,
 		marginBottom: 10,
 	},
-	// Estilos adicionales del resto de la información del servicio
 })
 
 export default ServiceDetailScreen

@@ -5,7 +5,7 @@ import * as Location from 'expo-location'
 import styles from './styles'
 
 const ContactScreen = () => {
-	const customLocations = [{ id: 1, title: 'Javi´s Boutique Ñuñoa', address: 'Duble Almeyda 1960, Ñuñoa', phone: '+56940380971', email: 'contacto@javisboutique.cl', latitude: -33.45476965276256, longitude: -70.61067747555619 }]
+	const customLocations = [{ id: 1, title: 'Javi´s Boutique Ñuñoa', address: 'Duble Almeyda 1960, Ñuñoa', phone: '+56942455975', email: 'contacto@javisboutique.cl', latitude: -33.45476965276256, longitude: -70.61067747555619 }]
 
 	const [location, setLocation] = useState()
 

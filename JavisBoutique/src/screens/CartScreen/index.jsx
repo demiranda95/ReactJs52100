@@ -10,7 +10,7 @@ const CartScreen = () => {
 	const dispatch = useDispatch()
 	const navigation = useNavigation()
 
-	const cartItems = useSelector((state) => state.cart.cartItems) // Obtén los productos del estado global o local
+	const cartItems = useSelector((state) => state.cart.cartItems)
 
 	const handleDeletePress = (item) => {
 		dispatch(removeFromCart(item.product.id))

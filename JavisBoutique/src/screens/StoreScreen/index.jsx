@@ -12,7 +12,7 @@ const StoreScreen = () => {
 
 	const OptionSection = () => {
 		const navigateToServices = () => {
-			navigation.navigate('Services') // Reemplaza 'ServicesList' con el nombre de la pantalla de servicios en tu aplicación
+			navigation.navigate('Services') 
 		}
 
 		const navigateToProducts = () => {

@@ -13,7 +13,6 @@ const ProfileScreen = () => {
 	const [email, setEmail] = useState('johndoe@example.com')
 
 	const handleSaveChanges = () => {
-		// Lógica para guardar los cambios en la información del usuario
 		console.log('Guardando cambios...')
 	}
 

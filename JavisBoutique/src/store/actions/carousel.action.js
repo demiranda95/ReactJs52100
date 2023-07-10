@@ -25,7 +25,7 @@ export const fetchCarousel = () => {
 		dispatch(fetchCarouselRequest())
 
 		try {
-			const productsData = carousel // Obtener los productos desde el archivo products.js
+			const productsData = carousel 
 
 			dispatch(fetchCarouselSuccess(productsData))
 		} catch (error) {

@@ -23,7 +23,7 @@ export const fetchProducts = () => {
 		dispatch(fetchProductsRequest())
 
 		try {
-			const productsData = products // Obtener los productos desde el archivo products.js
+			const productsData = products  
 
 			dispatch(fetchProductsSuccess(productsData))
 		} catch (error) {
